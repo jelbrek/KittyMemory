@@ -10,6 +10,8 @@
 
 #include "KittyMemory.h"
 
+using KittyMemory::ProcMap;
+
 class MemoryBackup
 {
 private:
@@ -18,15 +20,13 @@ private:
 
     std::vector<uint8_t> _orig_code;
 
-    std::string _hexString;
-
 public:
     MemoryBackup();
 
     /*
      * expects library name and relative address
      */
-    MemoryBackup(const char *libraryName, uintptr_t address, size_t backup_size, bool useMapCache = true);
+    MemoryBackup(const ProcMap &map, uintptr_t address, size_t backup_size);
 
     /*
      * expects absolute address
@@ -56,4 +56,6 @@ public:
      * Returns current target address bytes as hex string
      */
     std::string get_CurrBytes();
+
+    std::string get_OrigBytes();
 };
